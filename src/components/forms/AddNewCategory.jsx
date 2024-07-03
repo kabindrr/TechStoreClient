@@ -4,23 +4,23 @@ import { CustomInput } from "../common/custom-input/CustomInput";
 import { useDispatch } from "react-redux";
 import { createNewCategoryAction } from "../../features/categories/catAction";
 
-export const AddNewCategory = () => {
+export const AddNewCategory = ({ setShow }) => {
   const titleRef = useRef("");
   const dispatch = useDispatch();
 
-  const handleOnSubmit = () => {
+  const handleOnSubmit = async () => {
     const title = titleRef.current.value;
     if (!title) {
       return alert("Must fill up the form frist");
     }
 
-    dispatch(
+    const isSuccess = await dispatch(
       createNewCategoryAction({
         title,
       })
     );
 
-    //call api and send the data
+    isSuccess && setShow(false);
   };
 
   const inputs = [

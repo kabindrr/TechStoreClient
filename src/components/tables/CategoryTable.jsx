@@ -20,10 +20,6 @@ export const CategoryTable = () => {
     setSelectedCat(obj);
     dispatch(setShowModal(true));
   };
-
-  const handleOnDelete = (obj) => {
-    setSelectedCat(obj);
-  };
   return (
     <div>
       {selectedCat?._id && <EditCategory selectedCat={selectedCat} />}
@@ -36,7 +32,6 @@ export const CategoryTable = () => {
             <th>Title</th>
             <th>Slug</th>
             <th>Edit</th>
-            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -52,14 +47,6 @@ export const CategoryTable = () => {
                   variant="warning"
                 >
                   Edit
-                </Button>
-              </td>
-              <td>
-                <Button
-                  onClick={() => handleOnDelete({ _id, status, title, slug })}
-                  variant="danger"
-                >
-                  Delete
                 </Button>
               </td>
             </tr>

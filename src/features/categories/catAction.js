@@ -5,17 +5,15 @@ import { setCats } from "./catSlice";
 export const createNewCategoryAction = (catData) => async (dispatch) => {
   const response = await postNewCategory(catData);
 
-  console.log(response);
   if (response.status === "success") {
-    dispatch(setShowModal(false));
     dispatch(getCategoryAction());
+    return true;
   }
 };
 
 export const getCategoryAction = () => async (dispatch) => {
   const response = await getAllCategories();
 
-  console.log(response);
   if (response.status === "success") {
     dispatch(setCats(response.categories));
   }

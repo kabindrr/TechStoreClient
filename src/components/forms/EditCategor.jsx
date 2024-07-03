@@ -7,14 +7,16 @@ import { useDispatch } from "react-redux";
 import { createNewCategoryAction } from "../../features/categories/catAction";
 import useForm from "../../Hooks/useForm";
 import { CustomModal } from "../common/custom-modal/CustomModal";
+import { useCustomModal } from "../../Hooks/useCustomModal";
 
 export const EditCategory = ({ selectedCat }) => {
   const dispatch = useDispatch();
 
   const { form, setForm, handleOnChange } = useForm({});
-
+  const { show, setShow } = useCustomModal();
   useEffect(() => {
     setForm(selectedCat);
+    setShow(true);
   }, [selectedCat]);
 
   const handleOnSubmit = (e) => {
@@ -61,7 +63,7 @@ export const EditCategory = ({ selectedCat }) => {
     },
   ];
   return (
-    <CustomModal title="Edit Category">
+    <CustomModal show={show} setShow={setShow} title="Edit Category">
       <Form className=" ">
         {inputs.map((item, i) =>
           item.isSelectType ? (
