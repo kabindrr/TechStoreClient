@@ -4,24 +4,41 @@ import React, { useEffect, useRef } from "react";
 import { Button, Form } from "react-bootstrap";
 import { CustomInput, CustomSelect } from "../common/custom-input/CustomInput";
 import { useDispatch } from "react-redux";
-import { createNewCategoryAction } from "../../features/categories/catAction";
+import {
+  createNewCategoryAction,
+  editCategoryAction,
+  getCategoryAction,
+} from "../../features/categories/catAction";
 import useForm from "../../Hooks/useForm";
 import { CustomModal } from "../common/custom-modal/CustomModal";
 import { useCustomModal } from "../../Hooks/useCustomModal";
+import { editCategoryAxios } from "../../features/categories/catAxios";
 
 export const EditCategory = ({ selectedCat }) => {
   const dispatch = useDispatch();
 
   const { form, setForm, handleOnChange } = useForm({});
   const { show, setShow } = useCustomModal();
+
   useEffect(() => {
     setForm(selectedCat);
     setShow(true);
-  }, [selectedCat]);
+  }, [selectedCat, setShow, setForm]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    /**TODO
+     * 1. editCategory action
+     * 2. editcataxios
+     *
+     * backend:
+     * 1. put - /editCat
+     * 2. add auth middleware
+     * 2. use model to edit/
+     */
     console.log(form);
+
+    dispatch(editCategoryAction(form, setShow));
   };
 
   const inputs = [

@@ -1,5 +1,8 @@
-import { setShowModal } from "../../store/systemSlice";
-import { getAllCategories, postNewCategory } from "./catAxios";
+import {
+  editCategoryAxios,
+  getAllCategories,
+  postNewCategory,
+} from "./catAxios";
 import { setCats } from "./catSlice";
 
 export const createNewCategoryAction = (catData) => async (dispatch) => {
@@ -16,5 +19,18 @@ export const getCategoryAction = () => async (dispatch) => {
 
   if (response.status === "success") {
     dispatch(setCats(response.categories));
+  }
+};
+
+// edit action
+export const editCategoryAction = (obj, setModalShow) => async (dispatch) => {
+  // obj => _id and ...rest
+  //1. call the axios
+  const { status, message } = await editCategoryAxios(obj);
+
+  if (status === "success") {
+    dispatch(getCategoryAction());
+    setModalShow(false);
+    return true;
   }
 };

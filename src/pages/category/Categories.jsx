@@ -8,7 +8,6 @@ import { setShowModal } from "../../store/systemSlice";
 import { useCustomModal } from "../../Hooks/useCustomModal";
 
 const Categories = () => {
-  const dispatch = useDispatch();
   const { show, setShow } = useCustomModal();
   return (
     <div>

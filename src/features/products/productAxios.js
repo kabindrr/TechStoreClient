@@ -13,6 +13,18 @@ export const postNewProduct = (data) => {
   return apiProcessor(obj);
 };
 
+export const updateProduct = (data) => {
+  const obj = {
+    url: productEP,
+    method: "put",
+    data,
+    isPrivate: true,
+    showToast: true,
+  };
+
+  return apiProcessor(obj);
+};
+
 export const getAllProducts = () => {
   const obj = {
     url: productEP,

@@ -20,6 +20,7 @@ export const CategoryTable = () => {
     setSelectedCat(obj);
     dispatch(setShowModal(true));
   };
+
   return (
     <div>
       {selectedCat?._id && <EditCategory selectedCat={selectedCat} />}

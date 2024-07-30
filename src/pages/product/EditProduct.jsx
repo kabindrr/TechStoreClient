@@ -10,15 +10,16 @@ import { getCategoryAction } from "../../features/categories/catAction";
 import { Link } from "react-router-dom";
 import { createNewProductAction } from "../../features/products/productAction";
 
-const NewProduct = () => {
-  const { form, images, handleOnImgChange, setForm, handleOnChange } =
-    useForm();
+const EditProduct = () => {
+  const { form, images, handleOnImgChange, setForm, handleOnChange } = useForm(
+    {}
+  );
   const { cats } = useSelector((state) => state.catInfo);
   const dispatch = useDispatch();
 
   useEffect(() => {
     !cats.length && dispatch(getCategoryAction());
-  }, [dispatch, cats.length]);
+  }, []);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -58,6 +59,7 @@ const NewProduct = () => {
       required: true,
       isSelectType: true,
       options,
+      value: form.title,
     },
     {
       label: "Name",
@@ -142,7 +144,7 @@ const NewProduct = () => {
             type="file"
             name="images"
             required={true}
-            accept="images/png/jpg"
+            accept="images/png"
             multiple
           />
         </Form.Group>
@@ -155,4 +157,4 @@ const NewProduct = () => {
   );
 };
 
-export default NewProduct;
+export default EditProduct;

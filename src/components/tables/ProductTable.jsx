@@ -1,16 +1,26 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Button, Form, Pagination, Table } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import EditProduct from "../../pages/product/EditProduct";
+import { setShowModal } from "../../store/systemSlice";
 
 export const ProductTable = () => {
+  const dispatch = useDispatch();
   const [displayProd, setDisplayProd] = useState([]);
+  const [editProduct, setEditProduct] = useState({});
+
   const { products } = useSelector((state) => state.productInfo);
 
   useEffect(() => {
     setDisplayProd(products);
   }, []);
+
+  const handleOnEdit = (obj) => {
+    setEditProduct(obj);
+    dispatch(setShowModal(true));
+  };
 
   let active = 2;
   let items = [];
@@ -23,6 +33,7 @@ export const ProductTable = () => {
   }
   return (
     <div>
+      {editProduct?._id && <EditProduct setEditProduct={setEditProduct} />}
       <div className="d-flex justify-content-between align-items-center my-4">
         <div>30 Products Found</div>
         <div>
@@ -58,8 +69,10 @@ export const ProductTable = () => {
                 {prod.salesStart?.slice(0, 10)} To {prod.salesEnd?.slice(0, 10)}
               </td>
               <td>
-                <Link to={`/admin/product/edit/${prod._id}`}>
-                  <Button variant="warning">Edit</Button>
+                <Link to={`/admin/products/edit/${prod._id}`}>
+                  <Button onClick={handleOnEdit} variant="warning">
+                    Edit
+                  </Button>
                 </Link>
               </td>
             </tr>

@@ -22,3 +22,16 @@ export const getAllCategories = () => {
 
   return apiProcessor(obj);
 };
+
+// edit cat axios
+export const editCategoryAxios = (data) => {
+  const obj = {
+    url: catEP + "/edit",
+    method: "put",
+    data,
+    isPrivate: true,
+    showToast: true,
+  };
+
+  return apiProcessor(obj);
+};

@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { autoLoginAction } from "./features/users/userAction";
 import ForgetPassword from "./pages/user/ForgetPassword";
 import NewProduct from "./pages/product/NewProduct";
+import EditProduct from "./pages/product/EditProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,25 +37,26 @@ function App() {
 
         {/* private routes  */}
         <Route
-          path="/"
+          path="/admin"
           element={
             <Auth>
               <AdminLayout />
             </Auth>
           }
         >
-          <Route path="admin/dashboard" element={<Dashboard />} />
-          <Route path="admin/categories" element={<Categories />} />
-          <Route path="admin/products" element={<Products />} />
-          <Route path="admin/products/new" element={<NewProduct />} />
-          <Route path="admin/users" element={<User />} />
-          <Route path="admin/orders" element={<Orders />} />
-          <Route path="admin/reviews" element={<Reviews />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="categories" element={<Categories />} />
+          <Route path="products" element={<Products />} />
+          <Route path="products/new" element={<NewProduct />} />
+          <Route path="products/edit/:_id" element={<EditProduct />} />
+          <Route path="users" element={<User />} />
+          <Route path="orders" element={<Orders />} />
+          <Route path="reviews" element={<Reviews />} />
 
-          <Route path="admin/admins" element={<Admin />} />
-          <Route path="admin/new" element={<Register />} />
+          <Route path="admins" element={<Admin />} />
+          <Route path="new" element={<Register />} />
 
-          <Route path="admin/profile" element={<Profile />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
 
         <Route path="*" element={<h1>404 Page not found!</h1>} />
